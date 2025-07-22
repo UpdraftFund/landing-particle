@@ -877,8 +877,18 @@
         ctx = canvas.getContext("2d");
         resizeCanvas();
 
+        // Set particle count based on device size
+        let particleCount;
+        if (window.innerWidth <= 768) {
+          particleCount = 25; // Mobile
+        } else if (window.innerWidth <= 1024) {
+          particleCount = 50; // Tablet
+        } else {
+          particleCount = 100; // Desktop
+        }
+
         // Create particles
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < particleCount; i++) {
           particles.push(createParticle());
         }
 
@@ -916,7 +926,7 @@
 
           particle.vy -= (0.1 + turbulence * 0.2) * windStrength;
           // Add horizontal jitter based on turbulence (more in the center)
-          particle.vx += (Math.random() - 0.5) * 0.9 * turbulence;
+          particle.vx += (Math.random() - 0.5) * 0.5 * turbulence;
 
           // Apply friction to calm particles down
           particle.vx *= 0.95;
@@ -1074,9 +1084,6 @@
           }
         });
       });
-
-      // Resize handler
-      window.addEventListener("resize", resizeCanvas);
 
       // Initialize everything
       window.addEventListener("load", initWindSystem);
