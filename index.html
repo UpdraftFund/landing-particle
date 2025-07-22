@@ -19,12 +19,12 @@
 
     <style>
       :root {
-        --wind-primary: #ff6b6b;
-        --wind-secondary: #4ecdc4;
-        --wind-accent: #45b7d1;
-        --wind-purple: #96ceb4;
-        --wind-gold: #ffeaa7;
-        --wind-deep: #2d3436;
+        --wind-primary: #0e5e8c; /* Darker accent for headings and button backgrounds */
+        --wind-secondary: #3672a0; /* A mid-tone blue from the gradient */
+        --wind-accent: #748bb1; /* A lighter blue from the gradient */
+        --wind-purple: #a0c0d8; /* Another light blue from the gradient */
+        --wind-gold: #dff5fc; /* Main sky color */
+        --wind-deep: #06293e; /* Darkest blue from the gradient */
       }
 
       * {
@@ -36,7 +36,11 @@
       body {
         font-family: "Space Grotesk", sans-serif;
         overflow-x: hidden;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(
+          135deg,
+          rgb(247 250 251) 0%,
+          rgb(185 210 225) 100%
+        );
         min-height: 100vh;
       }
 
@@ -77,7 +81,7 @@
       }
 
       .floating-nav a {
-        color: white;
+        color: var(--wind-deep);
         text-decoration: none;
         margin: 0 20px;
         font-weight: 500;
@@ -115,9 +119,9 @@
         font-weight: 900;
         background: linear-gradient(
           45deg,
-          var(--wind-gold),
           var(--wind-primary),
-          var(--wind-secondary)
+          var(--wind-secondary),
+          var(--wind-accent)
         );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -138,7 +142,7 @@
 
       .hero-subtitle {
         font-size: clamp(1.2rem, 3vw, 2rem);
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(6, 41, 62, 0.8);
         margin-bottom: 50px;
         max-width: 800px;
         line-height: 1.6;
@@ -193,7 +197,7 @@
         backdrop-filter: blur(10px);
         border-radius: 15px;
         padding: 20px;
-        color: white;
+        color: var(--wind-deep);
         text-align: center;
       }
 
@@ -230,8 +234,8 @@
       .troposphere {
         background: linear-gradient(
           180deg,
-          rgba(102, 126, 234, 0.1) 0%,
-          rgba(118, 75, 162, 0.2) 100%
+          rgba(228, 238, 243, 0.1) 0%,
+          rgba(185, 210, 225, 0.2) 100%
         );
         padding: 100px 20px;
       }
@@ -239,8 +243,8 @@
       .mesosphere {
         background: linear-gradient(
           180deg,
-          rgba(118, 75, 162, 0.2) 0%,
-          rgba(255, 107, 107, 0.1) 100%
+          rgba(155, 191, 212, 0.2) 0%,
+          rgba(74, 139, 177, 0.1) 100%
         );
         padding: 100px 20px;
       }
@@ -248,8 +252,8 @@
       .thermosphere {
         background: linear-gradient(
           180deg,
-          rgba(255, 107, 107, 0.1) 0%,
-          rgba(78, 205, 196, 0.2) 100%
+          rgba(36, 114, 160, 0.1) 0%,
+          rgba(10, 67, 100, 0.2) 100%
         );
         padding: 100px 20px;
       }
@@ -263,7 +267,7 @@
         padding: 40px;
         margin: 20px;
         text-align: center;
-        color: white;
+        color: var(--wind-deep);
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
@@ -295,18 +299,6 @@
         left: 100%;
       }
 
-      @keyframes twinkle {
-        0%,
-        100% {
-          opacity: 0.3;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.5);
-        }
-      }
-
       /* Success Thermometer */
       .success-thermometer {
         width: 20px;
@@ -323,8 +315,8 @@
         width: 100%;
         background: linear-gradient(
           0deg,
-          var(--wind-primary),
-          var(--wind-gold)
+          var(--wind-deep),
+          var(--wind-primary)
         );
         border-radius: 10px;
         height: 75%;
@@ -345,7 +337,8 @@
         background: linear-gradient(
           45deg,
           var(--wind-primary),
-          var(--wind-secondary)
+          var(--wind-secondary),
+          var(--wind-accent)
         );
         color: white;
         border: none;
@@ -464,13 +457,13 @@
                 x2="100%"
                 y2="100%"
               >
-                <stop offset="0%" style="stop-color: #ff6b6b" />
-                <stop offset="50%" style="stop-color: #4ecdc4" />
-                <stop offset="100%" style="stop-color: #ffeaa7" />
+                <stop offset="0%" style="stop-color: rgb(247 250 251)" />
+                <stop offset="50%" style="stop-color: rgb(155 191 212)" />
+                <stop offset="100%" style="stop-color: rgb(14 94 140)" />
               </linearGradient>
             </defs>
           </svg>
-          <div style="color: rgba(255, 255, 255, 0.8); font-weight: 500">
+          <div style="color: rgba(6, 41, 62, 0.8); font-weight: 500">
             Click to Launch Your Idea
           </div>
         </div>
@@ -483,7 +476,7 @@
             style="
               font-size: 3rem;
               font-weight: 700;
-              color: white;
+              color: var(--wind-deep);
               margin-bottom: 50px;
               font-family: 'Orbitron', monospace;
             "
@@ -493,7 +486,7 @@
           <p
             style="
               font-size: 1.3rem;
-              color: rgba(255, 255, 255, 0.8);
+              color: rgba(6, 41, 62, 0.8);
               margin-bottom: 50px;
               max-width: 800px;
               margin-left: auto;
@@ -518,7 +511,7 @@
               <h3 style="font-size: 1.5rem; margin-bottom: 15px">
                 Earn from Ideas
               </h3>
-              <p style="opacity: 0.8; line-height: 1.6">
+              <p style="color: rgba(6, 41, 62, 0.8); line-height: 1.6">
                 Post your concept and earn money as supporters back your vision.
                 The earlier they support, the more you both earn.
               </p>
@@ -541,7 +534,7 @@
               <h3 style="font-size: 1.5rem; margin-bottom: 15px">
                 Community Amplification
               </h3>
-              <p style="opacity: 0.8; line-height: 1.6">
+              <p style="color: rgba(6, 41, 62, 0.8); line-height: 1.6">
                 Your ideas don't just sit in a void. Our community actively
                 discovers, discusses, and amplifies the best concepts.
               </p>
@@ -552,7 +545,7 @@
               <h3 style="font-size: 1.5rem; margin-bottom: 15px">
                 Zero Risk Launch
               </h3>
-              <p style="opacity: 0.8; line-height: 1.6">
+              <p style="color: rgba(6, 41, 62, 0.8); line-height: 1.6">
                 No upfront costs, no complex processes. Just pure idea
                 generation with financial upside when the community believes in
                 you.
@@ -569,7 +562,7 @@
             style="
               font-size: 3rem;
               font-weight: 700;
-              color: white;
+              color: #06293e;
               margin-bottom: 50px;
               font-family: 'Orbitron', monospace;
             "
@@ -579,7 +572,7 @@
           <p
             style="
               font-size: 1.3rem;
-              color: rgba(255, 255, 255, 0.8);
+              color: #06293e;
               margin-bottom: 50px;
               max-width: 800px;
               margin-left: auto;
@@ -642,7 +635,7 @@
             style="
               font-size: 3rem;
               font-weight: 700;
-              color: white;
+              color: var(--wind-deep);
               margin-bottom: 50px;
               font-family: 'Orbitron', monospace;
             "
@@ -652,7 +645,7 @@
           <p
             style="
               font-size: 1.3rem;
-              color: rgba(255, 255, 255, 0.8);
+              color: rgba(6, 41, 62, 0.8);
               margin-bottom: 50px;
               max-width: 800px;
               margin-left: auto;
@@ -677,7 +670,7 @@
               <h3 style="font-size: 1.5rem; margin-bottom: 15px">
                 Early Bird Returns
               </h3>
-              <p style="opacity: 0.8; line-height: 1.6">
+              <p style="color: rgba(6, 41, 62, 0.8); line-height: 1.6">
                 The earlier you back a project, the greater your potential
                 returns. Reward your ability to spot winners early.
               </p>
@@ -698,7 +691,7 @@
               <h3 style="font-size: 1.5rem; margin-bottom: 15px">
                 Transparent Impact
               </h3>
-              <p style="opacity: 0.8; line-height: 1.6">
+              <p style="color: rgba(6, 41, 62, 0.8); line-height: 1.6">
                 See exactly how your funding is used, track progress in
                 real-time, and measure the actual impact of your investment.
               </p>
@@ -709,7 +702,7 @@
               <h3 style="font-size: 1.5rem; margin-bottom: 15px">
                 Portfolio Diversification
               </h3>
-              <p style="opacity: 0.8; line-height: 1.6">
+              <p style="color: rgba(6, 41, 62, 0.8); line-height: 1.6">
                 Spread funding across multiple projects and sectors. Reduce risk
                 while maximizing your positive impact on the world.
               </p>
@@ -736,7 +729,7 @@
             style="
               font-size: 3rem;
               font-weight: 700;
-              color: white;
+              color: var(--wind-deep);
               margin-bottom: 50px;
               font-family: 'Orbitron', monospace;
             "
@@ -746,7 +739,7 @@
           <p
             style="
               font-size: 1.3rem;
-              color: rgba(255, 255, 255, 0.8);
+              color: rgba(6, 41, 62, 0.8);
               margin-bottom: 50px;
               max-width: 800px;
               margin-left: auto;
@@ -771,7 +764,7 @@
               <h3 style="font-size: 1.5rem; margin-bottom: 15px">
                 Community Engagement
               </h3>
-              <p style="opacity: 0.8; line-height: 1.6">
+              <p style="color: rgba(6, 41, 62, 0.8); line-height: 1.6">
                 Tap into passionate communities who care about your mission. Get
                 better ideas and more committed execution.
               </p>
@@ -782,7 +775,7 @@
               <h3 style="font-size: 1.5rem; margin-bottom: 15px">
                 Impact Measurement
               </h3>
-              <p style="opacity: 0.8; line-height: 1.6">
+              <p style="color: rgba(6, 41, 62, 0.8); line-height: 1.6">
                 Real-time dashboards, community feedback, and transparent
                 progress tracking. Know your funding is making a difference.
               </p>
@@ -810,7 +803,7 @@
             style="
               font-size: 4rem;
               font-weight: 900;
-              color: white;
+              color: var(--wind-deep);
               margin-bottom: 30px;
               font-family: 'Orbitron', monospace;
             "
@@ -820,7 +813,7 @@
           <p
             style="
               font-size: 1.4rem;
-              color: rgba(255, 255, 255, 0.8);
+              color: rgba(6, 41, 62, 0.8);
               margin-bottom: 50px;
               line-height: 1.6;
             "
@@ -860,7 +853,7 @@
             </button>
           </div>
 
-          <div style="color: rgba(255, 255, 255, 0.6); font-size: 14px">
+          <div style="color: rgba(6, 41, 62, 0.6); font-size: 14px">
             Questions?
             <a
               href="mailto:hello@updraft.org"
@@ -877,7 +870,7 @@
       let canvas,
         ctx,
         particles = [],
-        windStrength = 0.5; // Start at a medium "Breezy" strength
+        windStrength = 0.2; // Start at a medium "Breezy" strength
 
       function initWindSystem() {
         canvas = document.getElementById("wind-canvas");
@@ -899,7 +892,7 @@
         const particle = {
           x: Math.random() * canvas.width,
           y: p ? p.y : Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 2, // Reduced initial horizontal velocity
+          vx: (Math.random() - 0.5) * 1.5, // Reduced initial horizontal velocity
           vy: Math.random() * -2 - 1,
           size: Math.random() * 2 + 1,
           opacity: Math.random() * 0.5 + 0.2,
@@ -923,7 +916,7 @@
 
           particle.vy -= (0.1 + turbulence * 0.2) * windStrength;
           // Add horizontal jitter based on turbulence (more in the center)
-          particle.vx += (Math.random() - 0.5) * 0.6 * turbulence;
+          particle.vx += (Math.random() - 0.5) * 0.9 * turbulence;
 
           // Apply friction to calm particles down
           particle.vx *= 0.95;
@@ -945,7 +938,7 @@
           ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
           // Ensure particles at the edge are dim but not invisible
           const displayOpacity = particle.opacity * (0.1 + 0.9 * turbulence);
-          ctx.fillStyle = `rgba(255, 255, 255, ${displayOpacity})`;
+          ctx.fillStyle = `#a0c0d8`;
           ctx.fill();
         });
 
