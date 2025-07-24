@@ -931,14 +931,14 @@
 
           kite.vy -= (0.03 + turbulence * 0.05) * windStrength;
           // Add horizontal jitter based on turbulence (more in the center)
-          kite.vx += (Math.random() - 0.5) * 0.1 * turbulence;
+          kite.vx += (Math.random() - 0.5) * 0.3 * turbulence;
 
           // Apply friction to calm kites down
-          kite.vx *= 0.98;
+          kite.vx *= 0.95;
 
           // Limit velocity to prevent acceleration
           kite.vy = Math.max(-2, Math.min(2, kite.vy));
-          kite.vx = Math.max(-1, Math.min(1, kite.vx));
+          kite.vx = Math.max(-2, Math.min(2, kite.vx));
 
           kite.x += kite.vx;
           kite.y += kite.vy;
