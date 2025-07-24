@@ -44,8 +44,8 @@
         min-height: 100vh;
       }
 
-      /* Wind Particle Canvas */
-      #wind-canvas {
+      /* Wind Particle Container */
+      #wind-container {
         position: fixed;
         top: 0;
         left: 0;
@@ -53,6 +53,16 @@
         height: 100%;
         z-index: 1;
         pointer-events: none;
+        overflow: hidden;
+      }
+
+      /* Wind Kite Particle */
+      .wind-kite {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        pointer-events: none;
+        opacity: 0.7;
       }
 
       /* Floating Navigation */
@@ -368,7 +378,7 @@
   </head>
   <body>
     <!-- Wind Particle System -->
-    <canvas id="wind-canvas"></canvas>
+    <div id="wind-container"></div>
 
     <!-- Floating Navigation -->
     <nav class="floating-nav">
@@ -822,92 +832,138 @@
 
     <script>
       // Wind Particle System
-      let canvas,
-        ctx,
-        particles = [],
+      let container,
+        kites = [],
         windStrength = 0.2; // Start at a medium "Breezy" strength
 
       function initWindSystem() {
-        canvas = document.getElementById("wind-canvas");
-        ctx = canvas.getContext("2d");
-        resizeCanvas();
+        container = document.getElementById("wind-container");
+        resizeContainer();
 
         // Set particle count based on device size
-        let particleCount;
+        let kiteCount;
         if (window.innerWidth <= 768) {
-          particleCount = 25; // Mobile
+          kiteCount = 50; // Mobile
         } else if (window.innerWidth <= 1024) {
-          particleCount = 50; // Tablet
+          kiteCount = 75; // Tablet
         } else {
-          particleCount = 100; // Desktop
+          kiteCount = 150; // Desktop
         }
 
-        // Create particles
-        for (let i = 0; i < particleCount; i++) {
-          particles.push(createParticle());
+        // Create kites
+        for (let i = 0; i < kiteCount; i++) {
+          kites.push(createKite());
         }
 
         // Set initial gauge state
         updateWindGauge(windStrength);
 
-        animateParticles();
+        animateKites();
       }
 
-      function createParticle(p) {
-        const particle = {
-          x: Math.random() * canvas.width,
-          y: p ? p.y : Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 1.5, // Reduced initial horizontal velocity
-          vy: Math.random() * -2 - 1,
-          size: Math.random() * 2 + 1,
+      function createKite() {
+        const kite = document.createElement("div");
+        kite.className = "wind-kite";
+
+        // Create kite SVG with embedded gradient
+        kite.innerHTML = `
+          <svg viewBox="0 0 100 100" fill="none" width="100%" height="100%">
+            <defs>
+              <linearGradient
+                id="kiteGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" style="stop-color: rgb(247 250 251)" />
+                <stop offset="50%" style="stop-color: rgb(155 191 212)" />
+                <stop offset="100%" style="stop-color: rgb(14 94 140)" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M50 10 L30 40 L50 70 L70 40 Z"
+              fill="url(#kiteGradient)"
+              stroke="#fff"
+              stroke-width="2"
+            />
+            <line
+              x1="50"
+              y1="70"
+              x2="50"
+              y2="90"
+              stroke="#666"
+              stroke-width="2"
+            />
+          </svg>
+        `;
+
+        const kiteObj = {
+          element: kite,
+          x: Math.random() * container.offsetWidth,
+          y: Math.random() * container.offsetHeight,
+          vx: (Math.random() - 0.5) * 0.5, // Further reduced horizontal velocity
+          vy: Math.random() * -0.8 - 0.3, // Reduced vertical velocity
+          size: Math.random() * 10 + 5,
           opacity: Math.random() * 0.5 + 0.2,
         };
-        return particle;
+
+        kite.style.width = kiteObj.size + "px";
+        kite.style.height = kiteObj.size + "px";
+        kite.style.opacity = kiteObj.opacity;
+
+        container.appendChild(kite);
+        return kiteObj;
       }
 
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+      function resizeContainer() {
+        container.style.width = window.innerWidth + "px";
+        container.style.height = window.innerHeight + "px";
       }
 
-      function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach((particle, i) => {
+      function animateKites() {
+        kites.forEach((kite, i) => {
           const centerDist =
-            Math.abs(particle.x - canvas.width / 2) / (canvas.width / 2);
+            Math.abs(kite.x - container.offsetWidth / 2) /
+            (container.offsetWidth / 2);
 
           const turbulence = 1 - centerDist;
 
-          particle.vy -= (0.1 + turbulence * 0.2) * windStrength;
+          kite.vy -= (0.03 + turbulence * 0.05) * windStrength;
           // Add horizontal jitter based on turbulence (more in the center)
-          particle.vx += (Math.random() - 0.5) * 0.5 * turbulence;
+          kite.vx += (Math.random() - 0.5) * 0.1 * turbulence;
 
-          // Apply friction to calm particles down
-          particle.vx *= 0.95;
+          // Apply friction to calm kites down
+          kite.vx *= 0.98;
 
-          particle.x += particle.vx;
-          particle.y += particle.vy;
+          // Limit velocity to prevent acceleration
+          kite.vy = Math.max(-2, Math.min(2, kite.vy));
+          kite.vx = Math.max(-1, Math.min(1, kite.vx));
 
-          if (particle.y < -10) {
-            particles[i] = createParticle({ y: canvas.height + 10 });
+          kite.x += kite.vx;
+          kite.y += kite.vy;
+
+          if (kite.y < -20) {
+            kite.x = Math.random() * container.offsetWidth;
+            kite.y = container.offsetHeight + 20;
           }
-          // Wrap particles around horizontally for a continuous effect
-          if (particle.x < -10) {
-            particle.x = canvas.width + 9;
-          } else if (particle.x > canvas.width + 10) {
-            particle.x = -9;
+          // Wrap kites around horizontally for a continuous effect
+          if (kite.x < -20) {
+            kite.x = container.offsetWidth + 19;
+          } else if (kite.x > container.offsetWidth + 20) {
+            kite.x = -19;
           }
 
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          // Ensure particles at the edge are dim but not invisible
-          const displayOpacity = particle.opacity * (0.1 + 0.9 * turbulence);
-          ctx.fillStyle = `#a0c0d8`;
-          ctx.fill();
+          // Update position
+          kite.element.style.left = kite.x + "px";
+          kite.element.style.top = kite.y + "px";
+
+          // Add slight rotation for realism
+          const rotation = kite.vx * 15;
+          kite.element.style.transform = `rotate(${rotation}deg)`;
         });
 
-        requestAnimationFrame(animateParticles);
+        requestAnimationFrame(animateKites);
       }
 
       // Wind Gauge Interaction
@@ -1044,26 +1100,32 @@
 
       // Resize handler
       window.addEventListener("resize", () => {
-        resizeCanvas();
+        resizeContainer();
         resetParticles();
       });
 
       function resetParticles() {
-        particles = [];
+        // Clear existing kites
+        kites.forEach((kite) => {
+          if (kite.element && kite.element.parentNode) {
+            kite.element.parentNode.removeChild(kite.element);
+          }
+        });
+        kites = [];
 
-        // Set particle count based on device size
-        let particleCount;
+        // Set kite count based on device size
+        let kiteCount;
         if (window.innerWidth <= 768) {
-          particleCount = 50; // Mobile
+          kiteCount = 25; // Mobile
         } else if (window.innerWidth <= 1024) {
-          particleCount = 100; // Tablet
+          kiteCount = 50; // Tablet
         } else {
-          particleCount = 200; // Desktop
+          kiteCount = 100; // Desktop
         }
 
-        // Create particles
-        for (let i = 0; i < particleCount; i++) {
-          particles.push(createParticle());
+        // Create new kites
+        for (let i = 0; i < kiteCount; i++) {
+          kites.push(createKite());
         }
       }
 
