@@ -141,7 +141,7 @@
       }
 
       .hero-subtitle {
-        font-size: clamp(1.2rem, 3vw, 2rem);
+        font-size: clamp(1rem, 3vw, 1.75rem);
         color: rgba(6, 41, 62, 0.8);
         margin-bottom: 50px;
         max-width: 800px;
@@ -299,39 +299,6 @@
         left: 100%;
       }
 
-      /* Success Thermometer */
-      .success-thermometer {
-        width: 20px;
-        height: 200px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        position: relative;
-        margin: 20px auto;
-      }
-
-      .thermometer-fill {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background: linear-gradient(
-          0deg,
-          var(--wind-deep),
-          var(--wind-primary)
-        );
-        border-radius: 10px;
-        height: 75%;
-        animation: thermometerRise 3s ease-out infinite;
-      }
-
-      @keyframes thermometerRise {
-        0% {
-          height: 0%;
-        }
-        100% {
-          height: 75%;
-        }
-      }
-
       /* CTA Buttons */
       .wind-button {
         background: linear-gradient(
@@ -446,7 +413,7 @@
               y1="70"
               x2="50"
               y2="90"
-              stroke="#fff"
+              stroke="#666"
               stroke-width="2"
             />
             <defs>
@@ -515,18 +482,6 @@
                 Post your concept and earn money as supporters back your vision.
                 The earlier they support, the more you both earn.
               </p>
-              <div class="success-thermometer">
-                <div class="thermometer-fill"></div>
-              </div>
-              <div
-                style="
-                  font-size: 1.2rem;
-                  font-weight: 600;
-                  color: var(--wind-gold);
-                "
-              >
-                $50K+ Average Funding
-              </div>
             </div>
 
             <div class="user-card">
@@ -997,11 +952,13 @@
       document
         .getElementById("kite-launcher")
         .addEventListener("click", function (e) {
+          console.log("Kite clicked!");
+
           const kite = document.createElement("div");
           kite.innerHTML = `
                 <svg width="60" height="60" viewBox="0 0 100 100" style="position: fixed; z-index: 1000; pointer-events: none;">
                     <path d="M50 10 L30 40 L50 70 L70 40 Z" fill="url(#flyingKiteGradient)" stroke="#fff" stroke-width="2"/>
-                    <line x1="50" y1="70" x2="50" y2="90" stroke="#fff" stroke-width="2"/>
+                    <line x1="50" y1="70" x2="50" y2="90" stroke="#000" stroke-width="2"/>
                     <defs>
                         <linearGradient id="flyingKiteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" style="stop-color:#ff6b6b"/>
@@ -1084,6 +1041,31 @@
           }
         });
       });
+
+      // Resize handler
+      window.addEventListener("resize", () => {
+        resizeCanvas();
+        resetParticles();
+      });
+
+      function resetParticles() {
+        particles = [];
+
+        // Set particle count based on device size
+        let particleCount;
+        if (window.innerWidth <= 768) {
+          particleCount = 50; // Mobile
+        } else if (window.innerWidth <= 1024) {
+          particleCount = 100; // Tablet
+        } else {
+          particleCount = 200; // Desktop
+        }
+
+        // Create particles
+        for (let i = 0; i < particleCount; i++) {
+          particles.push(createParticle());
+        }
+      }
 
       // Initialize everything
       window.addEventListener("load", initWindSystem);
