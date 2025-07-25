@@ -839,7 +839,7 @@
       // Wind Particle System
       let container,
         kites = [],
-        windStrength = 0.2; // Start at a medium "Breezy" strength
+        windStrength = 0.33; // Start at a medium "Breezy" strength
 
       function initWindSystem() {
         container = document.getElementById("wind-container");
@@ -848,11 +848,11 @@
         // Set particle count based on device size
         let kiteCount;
         if (window.innerWidth <= 768) {
-          kiteCount = 50; // Mobile
+          kiteCount = 25; // Mobile
         } else if (window.innerWidth <= 1024) {
-          kiteCount = 75; // Tablet
+          kiteCount = 50; // Tablet
         } else {
-          kiteCount = 150; // Desktop
+          kiteCount = 100; // Desktop
         }
 
         // Create kites
@@ -909,7 +909,7 @@
           y: Math.random() * container.offsetHeight,
           vx: (Math.random() - 0.5) * 0.5, // Further reduced horizontal velocity
           vy: Math.random() * -0.8 - 0.3, // Reduced vertical velocity
-          size: Math.random() * 15 + 5,
+          size: Math.random() * 35 + 5,
           opacity: Math.random() * 0.5 + 0.2,
         };
 
