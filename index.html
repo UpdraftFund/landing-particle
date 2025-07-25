@@ -909,7 +909,7 @@
           y: Math.random() * container.offsetHeight,
           vx: (Math.random() - 0.5) * 0.5, // Further reduced horizontal velocity
           vy: Math.random() * -0.8 - 0.3, // Reduced vertical velocity
-          size: Math.random() * 10 + 5,
+          size: Math.random() * 15 + 5,
           opacity: Math.random() * 0.5 + 0.2,
         };
 
@@ -928,14 +928,11 @@
 
       function animateKites() {
         kites.forEach((kite, i) => {
-          const centerDist =
-            Math.abs(kite.x - container.offsetWidth / 2) /
-            (container.offsetWidth / 2);
-
-          const turbulence = 1 - centerDist;
+          // Apply constant turbulence to all kites evenly
+          const turbulence = 0.5;
 
           kite.vy -= (0.03 + turbulence * 0.05) * windStrength;
-          // Add horizontal jitter based on turbulence (more in the center)
+          // Add horizontal jitter based on turbulence
           kite.vx += (Math.random() - 0.5) * 0.3 * turbulence;
 
           // Apply friction to calm kites down
@@ -964,7 +961,7 @@
           kite.element.style.top = kite.y + "px";
 
           // Add slight rotation for realism
-          const rotation = kite.vx * 15;
+          const rotation = kite.vx * 35;
           kite.element.style.transform = `rotate(${rotation}deg)`;
         });
 
