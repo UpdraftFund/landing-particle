@@ -6,9 +6,6 @@
     <title>Updraft – Ride the Wind of Change</title>
 
     <!-- Advanced Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Fonts -->
@@ -408,6 +405,7 @@
           src="./updraft-1368-removebg-preview.png"
           alt="Kite in the Sky"
           class="kite-img"
+          fetchpriority="high"
         />
         <h1 class="hero-title">UPDRAFT</h1>
         <p class="hero-subtitle">
@@ -930,15 +928,17 @@
         kites.forEach((kite, i) => {
           // Use time for animation to ensure smooth swaying
           const time = Date.now() * 0.001;
-          
+
           // Apply sine wave sway for horizontal movement
-          const swayAmount = Math.sin(time * (1 + windStrength * 2) + i) * (0.5 + windStrength * 2);
+          const swayAmount =
+            Math.sin(time * (1 + windStrength * 2) + i) *
+            (0.5 + windStrength * 2);
           kite.x += swayAmount;
-          
+
           // Apply constant vertical velocity, adjusted by windStrength
           const baseVerticalSpeed = 1.5;
           kite.y -= baseVerticalSpeed * (0.5 + windStrength * 0.5);
-          
+
           // Reset kites when they go off top or bottom of screen
           if (kite.y < -20) {
             kite.x = Math.random() * container.offsetWidth;
@@ -947,18 +947,18 @@
             kite.x = Math.random() * container.offsetWidth;
             kite.y = -20;
           }
-          
+
           // Wrap kites around horizontally for a continuous effect
           if (kite.x < -20) {
             kite.x = container.offsetWidth + 19;
           } else if (kite.x > container.offsetWidth + 20) {
             kite.x = -19;
           }
-          
+
           // Update position
           kite.element.style.left = kite.x + "px";
           kite.element.style.top = kite.y + "px";
-          
+
           // Add slight rotation for realism based on sway amount
           const rotation = swayAmount * 25;
           kite.element.style.transform = `rotate(${rotation}deg)`;
