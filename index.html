@@ -209,6 +209,8 @@
         padding: 20px;
         color: var(--wind-deep);
         text-align: center;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
       }
 
       .wind-gauge {
@@ -1138,6 +1140,21 @@
       // Scroll-triggered animations
       window.addEventListener("scroll", () => {
         const scrolled = window.pageYOffset;
+        const windMeter = document.querySelector(".wind-meter");
+        const heroSection = document.querySelector(".hero-stratosphere");
+
+        if (heroSection) {
+          const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+
+          // Hide wind meter when scrolling past hero section
+          if (scrolled > heroBottom) {
+            windMeter.style.opacity = "0";
+          }
+          // Show wind meter when scrolling back to hero section
+          else {
+            windMeter.style.opacity = "1";
+          }
+        }
       });
 
       // Intersection Observer for user cards
