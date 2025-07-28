@@ -172,8 +172,8 @@
       }
 
       .kite-launcher:hover {
-        border-color: var(--wind-gold);
-        background: rgba(255, 234, 167, 0.1);
+        border-color: var(--wind-accent);
+        background: var(--wind-gold);
         transform: scale(1.05);
       }
 
@@ -308,50 +308,6 @@
         transition: left 0.5s;
       }
 
-      /* CTA Buttons */
-      .wind-button {
-        background: linear-gradient(
-          45deg,
-          var(--wind-primary),
-          var(--wind-secondary),
-          var(--wind-accent)
-        );
-        color: white;
-        border: none;
-        padding: 20px 40px;
-        border-radius: 50px;
-        font-size: 18px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        margin: 10px;
-      }
-
-      .wind-button:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-      }
-
-      .wind-button::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        transition: all 0.3s ease;
-      }
-
-      .wind-button:hover::before {
-        width: 300px;
-        height: 300px;
-      }
-
       /* Responsive */
       @media (max-width: 768px) {
         .floating-nav {
@@ -373,6 +329,88 @@
           padding: 15px;
         }
       }
+
+      /* New styles for image and links section */
+      .image-links-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .links-section {
+        text-align: left;
+        width: 400px;
+      }
+
+      .links-image {
+        max-width: 400px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .links-title {
+        color: var(--wind-deep);
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      .links-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        color: var(--wind-gold);
+      }
+
+      .links-list li {
+        margin: 10px 0;
+      }
+
+      .links-list a {
+        color: var(--wind-gold);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .links-list a:hover {
+        color: var(--wind-deep);
+        text-decoration: underline;
+      }
+
+      .catch-the-wind {
+        margin-top: 30px;
+        font-size: 14px;
+        color: rgba(180, 203, 218, 0.6);
+      }
+
+      .catch-the-wind a {
+        color: var(--wind-gold);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .catch-the-wind a:hover {
+        color: var(--wind-deep);
+        text-decoration: underline;
+      }
+
+      /* Media query for responsive behavior */
+      @media (max-width: 768px) {
+        .image-links-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .links-section {
+          text-align: center;
+          width: auto;
+        }
+
+        .links-title {
+          text-align: center;
+        }
+      }
     </style>
   </head>
   <body>
@@ -380,11 +418,11 @@
     <div id="wind-container"></div>
 
     <!-- Floating Navigation -->
-    <nav class="floating-nav">
-      <a href="#creators">Creators</a>
-      <a href="#builders">Builders</a>
-      <a href="#funders">Funders</a>
-      <a href="#organizations">Organizations</a>
+    <nav class="floating-nav" style="text-align: center">
+      <a href="#creators">For Creators</a>
+      <a href="#builders">For Builders</a>
+      <a href="#funders">For Funders</a>
+      <a href="#organizations">For Organizations</a>
       <!-- <a href="#launch">Launch</a> -->
     </nav>
 
@@ -402,10 +440,10 @@
     <!-- Main Content -->
     <div class="kite-container">
       <!-- Hero Section - Stratosphere -->
-      <section class="hero-stratosphere">
+      <section class="hero-stratosphere" style="border: none">
         <img
-          src="./updraft-1368-removebg-preview.png"
-          alt="Kite in the Sky"
+          src="updraft-1368-removebg-preview.png"
+          alt="Updraft logo of a kite sailing in the clouds"
           class="kite-img"
           fetchpriority="high"
         />
@@ -415,44 +453,47 @@
           Launch your vision into the wind of collective action.
         </p>
 
-        <div class="kite-launcher" id="kite-launcher">
-          <svg class="kite-svg" viewBox="0 0 100 100" fill="none">
-            <path
-              d="M50 10 L30 40 L50 70 L70 40 Z"
-              fill="url(#kiteGradient)"
-              stroke="#fff"
-              stroke-width="2"
-            />
-            <line
-              x1="50"
-              y1="70"
-              x2="50"
-              y2="90"
-              stroke="#666"
-              stroke-width="2"
-            />
-            <defs>
-              <linearGradient
-                id="kiteGradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop offset="0%" style="stop-color: rgb(247 250 251)" />
-                <stop offset="50%" style="stop-color: rgb(155 191 212)" />
-                <stop offset="100%" style="stop-color: rgb(14 94 140)" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <div style="color: rgba(6, 41, 62, 0.8); font-weight: 500">
-            Click to Launch Your Idea
+        <a href="https://updraft.fund" style="text-decoration: none">
+          <div class="kite-launcher">
+            <svg class="kite-svg" viewBox="0 0 100 100" fill="none">
+              <path
+                d="M50 10 L30 40 L50 70 L70 40 Z"
+                fill="url(#kiteGradient)"
+                stroke="#fff"
+                stroke-width="2"
+              />
+              <line
+                x1="50"
+                y1="70"
+                x2="50"
+                y2="90"
+                stroke="#666"
+                stroke-width="2"
+              />
+              <defs>
+                <linearGradient
+                  id="kiteGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" style="stop-color: rgb(247 250 251)" />
+                  <stop offset="50%" style="stop-color: rgb(155 191 212)" />
+                  <stop offset="100%" style="stop-color: rgb(14 94 140)" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <div style="color: rgba(6, 41, 62, 0.8); font-weight: 500">
+              Click to Launch Your Idea
+            </div>
           </div>
-        </div>
+        </a>
       </section>
 
       <!-- Troposphere - For Creators -->
-      <section id="creators" class="sky-layer troposphere">
+      <section id="creators" class="sky-layer troposphere" style="border: none">
         <div style="max-width: 1200px; margin: 0 auto; text-align: center">
           <h2
             style="
@@ -526,7 +567,7 @@
       </section>
 
       <!-- Mesosphere - For Builders -->
-      <section id="builders" class="sky-layer mesosphere">
+      <section id="builders" class="sky-layer mesosphere" style="border: none">
         <div style="max-width: 1200px; margin: 0 auto; text-align: center">
           <h2
             style="
@@ -599,7 +640,7 @@
       </section>
 
       <!-- Lower Atmosphere - For Funders -->
-      <section id="funders" class="sky-layer thermosphere">
+      <section id="funders" class="sky-layer thermosphere" style="border: none">
         <div style="max-width: 1200px; margin: 0 auto; text-align: center">
           <h2
             style="
@@ -692,6 +733,7 @@
             rgba(255, 234, 167, 0.1) 100%
           );
           padding: 100px 20px;
+          border: none;
         "
       >
         <div style="max-width: 1200px; margin: 0 auto; text-align: center">
@@ -766,6 +808,7 @@
           );
           padding: 100px 20px;
           text-align: center;
+          border: none;
         "
       >
         <div style="max-width: 800px; margin: 0 auto">
@@ -782,7 +825,7 @@
           </h2>
           <p
             style="
-              font-size: 1.4rem;
+              font-size: 1.2rem;
               color: rgba(6, 41, 62, 0.8);
               margin-bottom: 50px;
               line-height: 1.6;
@@ -792,44 +835,44 @@
             to new heights.
           </p>
 
-          <div
-            style="
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: center;
-              gap: 20px;
-              margin-bottom: 40px;
-            "
-          >
-            <button class="wind-button" onclick="launchKite('creator')">
-              <span style="position: relative; z-index: 1"
-                >🚀 Launch as Creator</span
-              >
-            </button>
-            <button class="wind-button" onclick="launchKite('builder')">
-              <span style="position: relative; z-index: 1"
-                >🔨 Join as Builder</span
-              >
-            </button>
-            <button class="wind-button" onclick="launchKite('funder')">
-              <span style="position: relative; z-index: 1"
-                >💰 Fund the Future</span
-              >
-            </button>
-            <button class="wind-button" onclick="launchKite('org')">
-              <span style="position: relative; z-index: 1"
-                >🏢 Partner with Us</span
-              >
-            </button>
+          <div class="image-links-container">
+            <img
+              src="get-upd.png"
+              alt="Wizard and grandkids casting kites into the starry night sky over a valley with a river"
+              class="links-image"
+            />
+
+            <div class="links-section">
+              <h3 class="links-title">About</h3>
+              <ul class="links-list">
+                <li>
+                  <a
+                    href="https://mirror.xyz/0xB7C5583C4C81e97e2883F4B2A250368d8eEcB0e2"
+                    >Blog</a
+                  >
+                </li>
+                <li><a href="https://guide.updraft.fund/updraft/">Guide</a></li>
+                <li>
+                  <a
+                    href="https://docs.google.com/document/d/1TKA-K8YadRdgz-Qek01TUcCkRaI9CKCXGtJ31AbVWIU/edit?usp=sharing"
+                    >What are Attention Streams?</a
+                  >
+                </li>
+              </ul>
+              <h3 class="links-title">Social</h3>
+              <ul class="links-list">
+                <li><a href="https://x.com/updraftfund">Twitter</a></li>
+                <li><a href="https://discord.gg/mQJ58MY6Nz">Discord</a></li>
+              </ul>
+            </div>
           </div>
 
-          <div style="color: rgba(6, 41, 62, 0.6); font-size: 14px">
+          <div
+            style="color: rgba(180, 203, 218, 0.6); font-size: 14px"
+            class="catch-the-wind"
+          >
             Questions?
-            <a
-              href="mailto:hello@updraft.org"
-              style="color: var(--wind-gold); text-decoration: none"
-              >Catch the wind →</a
-            >
+            <a href="https://discord.gg/mQJ58MY6Nz">Catch the wind →</a>
           </div>
         </div>
       </section>
@@ -1006,86 +1049,6 @@
       document.addEventListener("mouseup", () => {
         isDragging = false;
       });
-
-      // Kite launcher interaction
-      document
-        .getElementById("kite-launcher")
-        .addEventListener("click", function (e) {
-          console.log("Kite clicked!");
-
-          const kite = document.createElement("div");
-          kite.innerHTML = `
-                <svg width="60" height="60" viewBox="0 0 100 100" style="position: fixed; z-index: 1000; pointer-events: none;">
-                    <path d="M50 10 L30 40 L50 70 L70 40 Z" fill="url(#flyingKiteGradient)" stroke="#fff" stroke-width="2"/>
-                    <line x1="50" y1="70" x2="50" y2="90" stroke="#000" stroke-width="2"/>
-                    <defs>
-                        <linearGradient id="flyingKiteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#ff6b6b"/>
-                            <stop offset="50%" style="stop-color:#4ecdc4"/>
-                            <stop offset="100%" style="stop-color:#ffeaa7"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-            `;
-
-          kite.style.left = e.clientX + "px";
-          kite.style.top = e.clientY + "px";
-
-          document.body.appendChild(kite);
-
-          gsap.to(kite, {
-            x: (Math.random() - 0.5) * window.innerWidth,
-            y: -window.innerHeight,
-            duration: 3 + (1 - windStrength) * 3,
-            ease: "power2.in",
-            rotation: (Math.random() - 0.5) * 720,
-            onComplete: () => kite.remove(),
-          });
-        });
-
-      // Launch functions
-      function launchKite(type) {
-        const messages = {
-          creator: "🚀 Launching your creative journey...",
-          builder: "🔨 Connecting you to funded projects...",
-          funder: "💰 Opening investment opportunities...",
-          org: "🏢 Preparing partnership portal...",
-        };
-
-        const notification = document.createElement("div");
-        notification.innerHTML = messages[type];
-        notification.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(0,0,0,0.8);
-                color: white;
-                padding: 20px 40px;
-                border-radius: 50px;
-                font-size: 18px;
-                z-index: 1000;
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255,255,255,0.2);
-            `;
-
-        document.body.appendChild(notification);
-
-        gsap.fromTo(
-          notification,
-          { opacity: 0, scale: 0.5 },
-          { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" }
-        );
-
-        setTimeout(() => {
-          gsap.to(notification, {
-            opacity: 0,
-            scale: 0.5,
-            duration: 0.3,
-            onComplete: () => notification.remove(),
-          });
-        }, 2000);
-      }
 
       // Smooth scrolling for navigation
       document.querySelectorAll(".floating-nav a").forEach((anchor) => {
