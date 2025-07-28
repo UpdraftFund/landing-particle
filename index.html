@@ -72,8 +72,8 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 50px;
         padding: 10px 30px;
-        animation: float 6s ease-in-out infinite;
         display: inline-flex;
+        /* animation: float 6s ease-in-out infinite; */
       }
 
       @keyframes float {
@@ -134,7 +134,7 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
         margin-bottom: 30px;
-        animation: titlePulse 4s ease-in-out infinite;
+        /* animation: titlePulse 4s ease-in-out infinite; */
       }
 
       @keyframes titlePulse {
@@ -206,6 +206,8 @@
         padding: 20px;
         color: var(--wind-deep);
         text-align: center;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
       }
 
       .wind-gauge {
@@ -280,10 +282,14 @@
         overflow: hidden;
       }
 
-      .user-card:hover {
+      .animate-in {
         transform: translateY(-10px);
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.2);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .animate-in::before {
+        left: 100%;
       }
 
       .user-card::before {
@@ -300,10 +306,6 @@
           transparent
         );
         transition: left 0.5s;
-      }
-
-      .user-card:hover::before {
-        left: 100%;
       }
 
       /* CTA Buttons */
@@ -1136,6 +1138,42 @@
       // Scroll-triggered animations
       window.addEventListener("scroll", () => {
         const scrolled = window.pageYOffset;
+        const windMeter = document.querySelector(".wind-meter");
+        const heroSection = document.querySelector(".hero-stratosphere");
+
+        if (heroSection) {
+          const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+
+          // Hide wind meter when scrolling past hero section
+          if (scrolled > heroBottom) {
+            windMeter.style.opacity = "0";
+          }
+          // Show wind meter when scrolling back to hero section
+          else {
+            windMeter.style.opacity = "1";
+          }
+        }
+      });
+
+      // Intersection Observer for user cards
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animate-in");
+            } else {
+              entry.target.classList.remove("animate-in");
+            }
+          });
+        },
+        {
+          threshold: 0.5, // Trigger when 50% of the card is visible
+        }
+      );
+
+      // Observe all user cards
+      document.querySelectorAll(".user-card").forEach((card) => {
+        observer.observe(card);
       });
     </script>
   </body>
