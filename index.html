@@ -157,18 +157,17 @@
 
       /* Interactive Kite Launcher */
       .kite-launcher {
-        width: 300px;
-        height: 200px;
         border: 2px dashed rgba(255, 255, 255, 0.3);
         border-radius: 20px;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
         align-items: center;
         cursor: pointer;
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
+        padding-right: 20px;
+        margin-bottom: 20px;
       }
 
       .kite-launcher:hover {
@@ -180,8 +179,9 @@
       .kite-svg {
         width: 80px;
         height: 80px;
-        margin-bottom: 20px;
         animation: kiteBob 3s ease-in-out infinite;
+        padding: 10px 0;
+        margin-top: 10px;
       }
 
       @keyframes kiteBob {
